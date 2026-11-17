@@ -1,0 +1,16 @@
+-- Write your MySQL query statement below
+
+WITH getcount AS (
+    SELECT
+        candidateid,
+        COUNT(candidateid) AS votecount
+    FROM Vote
+    GROUP BY candidateid
+)
+
+SELECT name
+FROM Candidate c
+INNER JOIN getcount v
+on c.id = v.candidateId 
+ORDER BY votecount DESC
+LIMIT 1
